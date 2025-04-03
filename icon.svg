@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <!-- Background -->
+  <rect width="300" height="300" fill="#0c0c14" rx="15" ry="15"/>
+  
+  <!-- Cyberpunk Grid -->
+  <g opacity="0.15">
+    <path d="M0 50 L300 50" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M0 100 L300 100" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M0 150 L300 150" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M0 200 L300 200" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M0 250 L300 250" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M50 0 L50 300" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M100 0 L100 300" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M150 0 L150 300" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M200 0 L200 300" stroke="#05d9e8" stroke-width="1"/>
+    <path d="M250 0 L250 300" stroke="#05d9e8" stroke-width="1"/>
+  </g>
+  
+  <!-- Outer Glow -->
+  <circle cx="150" cy="150" r="130" fill="none" stroke="#ff2a6d" stroke-width="3" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Inner Glow -->
+  <circle cx="150" cy="150" r="110" fill="none" stroke="#0ff" stroke-width="2" opacity="0.7">
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Accessibility Symbol Base -->
+  <circle cx="150" cy="150" r="90" fill="#151525" stroke="#05d9e8" stroke-width="4"/>
+  
+  <!-- Accessibility Person -->
+  <circle cx="150" cy="110" r="20" fill="#05d9e8">
+    <animate attributeName="fill" values="#05d9e8;#0ff;#05d9e8" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Arms and Legs -->
+  <path d="M150 130 L150 190" stroke="#0ff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M150 160 L120 180" stroke="#0ff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M150 160 L180 180" stroke="#0ff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M150 190 L125 230" stroke="#0ff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M150 190 L175 230" stroke="#0ff" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Cyberpunk Elements -->
+  <!-- Circuit lines -->
+  <path d="M65 150 L110 150" stroke="#ff2a6d" stroke-width="3" stroke-dasharray="5,3"/>
+  <path d="M190 150 L235 150" stroke="#ff2a6d" stroke-width="3" stroke-dasharray="5,3"/>
+  <path d="M150 65 L150 90" stroke="#ff2a6d" stroke-width="3" stroke-dasharray="5,3"/>
+  <path d="M150 210 L150 235" stroke="#ff2a6d" stroke-width="3" stroke-dasharray="5,3"/>
+  
+  <!-- Connection points -->
+  <circle cx="110" cy="150" r="3" fill="#ff2a6d"/>
+  <circle cx="190" cy="150" r="3" fill="#ff2a6d"/>
+  <circle cx="150" cy="90" r="3" fill="#ff2a6d"/>
+  <circle cx="150" cy="210" r="3" fill="#ff2a6d"/>
+  
+  <!-- Visual Aids Symbols -->
+  <!-- Eye -->
+  <circle cx="90" cy="100" r="10" fill="none" stroke="#05d9e8" stroke-width="2"/>
+  <circle cx="90" cy="100" r="5" fill="#05d9e8"/>
+  
+  <!-- Ear -->
+  <path d="M210 100 Q220 90, 220 100 Q220 110, 210 100" fill="none" stroke="#05d9e8" stroke-width="2"/>
+  <path d="M210 100 L215 105" stroke="#05d9e8" stroke-width="2"/>
+  
+  <!-- Speech Wave -->
+  <path d="M90 200 Q100 190, 110 200 Q120 210, 130 200" fill="none" stroke="#05d9e8" stroke-width="2"/>
+  
+  <!-- Hand -->
+  <path d="M200 200 L210 190 L210 210 Z" fill="#05d9e8"/>
+  
+  <!-- Glowing Edges -->
+  <circle cx="150" cy="150" r="90" fill="none" stroke="#0ff" stroke-width="1" opacity="0.8">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="90;92;90" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Hexagonal Decorations -->
+  <path d="M60 70 L70 60 L80 70 L80 80 L70 90 L60 80 Z" fill="none" stroke="#ff2a6d" stroke-width="1"/>
+  <path d="M220 70 L230 60 L240 70 L240 80 L230 90 L220 80 Z" fill="none" stroke="#ff2a6d" stroke-width="1"/>
+  <path d="M60 220 L70 210 L80 220 L80 230 L70 240 L60 230 Z" fill="none" stroke="#ff2a6d" stroke-width="1"/>
+  <path d="M220 220 L230 210 L240 220 L240 230 L230 240 L220 230 Z" fill="none" stroke="#ff2a6d" stroke-width="1"/>
+</svg>
