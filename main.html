@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://localhost/* 'unsafe-inline' 'unsafe-eval'" />
+    <title>Chrome Extension For differently Abled</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap');
+        
+        :root {
+            --neon-text: #0ff;
+            --neon-border: #f0f;
+            --background: #0c0c14;
+            --secondary-bg: #151525;
+            --accent: #ff2a6d;
+            --text: #05d9e8;
+            --secondary-text: #d1f7ff;
+            --glow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-width: 300px;
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 15px;
+            border: 1px solid var(--neon-border);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--neon-text));
+            z-index: 999;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1 {
+            font-size: 1.4rem;
+            color: var(--neon-text);
+            text-shadow: 0 0 5px var(--neon-text);
+        }
+        
+        h2 {
+            font-size: 1.2rem;
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+        }
+        
+        img {
+            border: 2px solid var(--accent);
+            border-radius: 5px;
+            padding: 5px;
+            background-color: var(--secondary-bg);
+            transition: all 0.3s ease;
+            margin: 10px 0;
+            filter: drop-shadow(0 0 5px var(--accent));
+        }
+        
+        img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px var(--accent));
+        }
+        
+        button {
+            background-color: transparent;
+            border: 1px solid var(--neon-text);
+            color: var(--neon-text);
+            padding: 8px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        button:hover {
+            background-color: rgba(5, 217, 232, 0.1);
+            box-shadow: 0 0 10px var(--neon-text);
+            transform: translateY(-2px);
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-text), transparent);
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--accent);
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid rgba(5, 217, 232, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        th {
+            background-color: rgba(255, 42, 109, 0.2);
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+        
+        tr:hover td {
+            background-color: rgba(5, 217, 232, 0.1);
+            color: var(--neon-text);
+        }
+        
+        input, select, textarea {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--neon-text);
+            color: var(--secondary-text);
+            padding: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 5px var(--neon-text);
+            border-color: var(--accent);
+        }
+        
+        input[type="radio"] {
+            margin-left: 10px;
+            accent-color: var(--accent);
+        }
+        
+        label {
+            margin-right: 5px;
+            color: var(--secondary-text);
+        }
+        
+        #mainDiv, #qsre, #choose, #ishihara, #cct, #bldRes1, #spch {
+            background-color: var(--secondary-bg);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--accent);
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.2);
+        }
+        
+        #spch {
+            background: linear-gradient(135deg, var(--secondary-bg), rgba(12, 12, 20, 0.9));
+        }
+        
+        .voice_to_text {
+            position: relative;
+        }
+        
+        #click_to_record {
+            background-color: rgba(255, 42, 109, 0.2);
+            border-color: var(--accent);
+        }
+        
+        #click_to_record:hover {
+            background-color: rgba(255, 42, 109, 0.4);
+        }
+        
+        /* Glitch effect */
+        h1::after {
+            content: attr(id);
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: var(--accent);
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translateX(-2px);
+            opacity: 0.7;
+            animation: glitch 2s infinite;
+            text-shadow: none;
+        }
+        
+        @keyframes glitch {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+                transform: translateX(-2px);
+            }
+            20% {
+                clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%);
+                transform: translateX(2px);
+            }
+            40% {
+                clip-path: polygon(0 45%, 100% 45%, 100% 65%, 0 65%);
+                transform: translateX(-2px);
+            }
+            60% {
+                clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+                transform: translateX(2px);
+            }
+            80% {
+                clip-path: polygon(0 75%, 100% 75%, 100% 90%, 0 90%);
+                transform: translateX(-2px);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+                transform: translateX(-2px);
+            }
+        }
+        
+        /* Scanner effect */
+        body::after {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(transparent, var(--neon-text), transparent);
+            opacity: 0.5;
+            filter: blur(3px);
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% {
+                top: -5%;
+            }
+            100% {
+                top: 105%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div align="center">
+
+  <div id="mainDiv">
+
+    <h1 id="h1">Chrome Extension for differently abled users</h1>
+    <div style="text-align: center;">
+        <img src="icon.svg" alt="icon" width="150px" height="150px">
+      </div>
+    <br><br>
+    <h4 id="para">An extension to ease the access and navigation of web content for the differently abled users.</h4><br>
+    
+    <button id="next">Next -></button><br><hr>
+
+    <h2><u>Keyboard Shortkeys</u></h2><br>
+
+    <table>
+      
+      <tr>
+        <th>Key</th>
+        <th>Function</th>
+      </tr>
+
+      <tr><td>-></td><td>Navigate Forward</td></tr>
+      <tr><td><-</td><td>Navigate Backward</td></tr>
+      <tr><td>x</td><td>Close</td></tr>
+      <tr><td>i</td><td>Guide image to speech convertor</td></tr>
+      <tr><td>c</td><td>Guide Voice Coding </td></tr>
+      <tr><td>s</td><td>Guide For UML Generator</td></tr>
+      <tr><td>w</td><td>Voice Assist</td></tr>
+      <tr><td>h</td><td>Help</td></tr>
+      
+    </table>
+
+  </div>
+
+  
+
+  
+  <div id="ishihara">
+    
+    <h2>Image to Speech </h2>
+    <div style="text-align: center;">
+    <img src="image_to_voice.jpeg" width="150px" height="150px"><br>
+    <h4>After arriving here, simply press "W" on the keyboard and say "image to voice." The system will recognize your speech and redirect you to the appropriate page.  </h4>
+
+</div>
+   
+  
+  </div>
+
+  <div id="cct">
+    
+    <h2>Voice Coding</h2>
+    <div style="text-align: center;">
+    
+    <img src="voice_code.jpeg" width="150px" height="150px"><br>
+    <h4>
+        After arriving here , simply press "W" on the Keyboard and say "Voice code " The system will recognize your speech and redirect you to the appropriate page.
+    </h4>
+    <h5>Here, I will provide a document that clearly explains the voice commands you need to use, allowing me to write the code seamlessly.
+        just drag this doc into browser tab then you can see it clearly 
+</h5>
+<a  style="text-decoration: none; color: rgba(5, 217, 232, 0.3);"  href="Helpdoc.pdf">Help Doc</a>
+
+    </div>
+
+
+  
+  </div>
+
+<div id="cct">
+    
+    <h2>UML Generator</h2>
+    <div style="text-align: center;">
+    
+    <img src="UML.jpeg" width="150px" height="150px"><br>
+    <h4>
+        After arriving here , simply press "W" on the Keyboard and say " UML Generator " The system will recognize your speech and redirect you to the appropriate page.
+    </h4>
+    
+
+
+    </div>
+
+
+  
+  </div>
+
+
+</div>
+
+<div id="spch" class="voice_to_text"> 
+  
+  <br>
+  <hr>
+
+  <div style="text-align: center;">
+  <h1>Voice Assist</h1><br>
+
+  <textarea name="convert_text" id="convert_text" cols="30" rows="2"></textarea><br>
+  
+  <button id="click_to_record">speak</button> 
+  <button id="speech_help">help</button>
+
+  <button id="search_for"></button>
+
+</div>
+</div>
+<script src="jquery-3.6.1.min.js"></script>
+<script src="background.js"></script>
+<script src="ishihara.js"></script>
+<script src="cct.js"></script>
+<script src="speech.js"></script>
+<script src="keyboard.js"></script>
+</body>
+</html>
