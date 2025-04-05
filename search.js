@@ -9,7 +9,7 @@ function search_for() {
         "open gmail": "https://mail.google.com/",
         "open mail": "https://mail.google.com/",
         "open quora": "https://www.quora.com/",
-        "compose mail": "https://mail.google.com/mail/u/0/#inbox?compose=CllgCJfmrZNrjMlmXTnmkjpskHTRZWFWlxwJqqNlWMplWNftvjQPPVfzRnBPQfqGkNFZxZlnmSB",
+        "compose mail": "https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcRzBzBcCBDzFrTvqvzJSlDsKRZCGZPJmkvgRLWpfxRmHjCrrQJlVzzcBZRzfJLldSDcZmLKk",
         "twitter post": "https://twitter.com/compose/tweet",
         "google images": "https://www.google.co.in/imghp?hl=en&tab=ri&authuser=0&ogbl",
         "open spotify": "https://open.spotify.com/",
@@ -106,19 +106,55 @@ function search_for() {
             if (clickCommandProcessed) break;
         }
 
-        // AI fallback for unrecognized commands that start with "open"
-        if (!commandFound && transcript.toLowerCase().startsWith("open ")) {
-            const siteName = transcript.toLowerCase().replace("open ", "").trim();
+      // AI fallback for unrecognized commands that start with "open"
+      if (!commandFound && transcript.toLowerCase().startsWith("open ")) {
+        const siteName = transcript.toLowerCase().replace("open ", "").trim();
+        
+        // Try common domains
+        const domains = [".com", ".org", ".net", ".edu", ".io"];
+        
+        // Create a function to check if a URL is valid
+        const checkUrlExists = (url) => {
+            return new Promise((resolve) => {
+                fetch(url, { method: 'HEAD', mode: 'no-cors' })
+                    .then(() => resolve(true))
+                    .catch(() => resolve(false));
+            });
+        };
+        
+        // Try each domain sequentially
+        (async () => {
+            let success = false;
             
-            // Try common domains
-            const domains = [".com", ".org", ".net", ".edu", ".io"];
-            let url = "";
+            for (const domain of domains) {
+                const url = `https://www.${siteName}${domain}`;
+                console.log(`AI attempting to navigate to: ${url}`);
+                
+                try {
+                    // Check if URL exists before opening
+                    const exists = await checkUrlExists(url);
+                    
+                    if (exists) {
+                        window.open(url);
+                        console.log(`Successfully opened: ${url}`);
+                        success = true;
+                        break;
+                    } else {
+                        console.log(`URL does not exist: ${url}`);
+                        // Continue to next domain
+                    }
+                } catch (error) {
+                    console.log(`Error checking URL: ${url}`, error);
+                    // Continue to the next domain
+                }
+            }
             
-            // First attempt: try with www prefix and first domain
-            url = `https://www.${siteName}${domains[0]}`;
-            console.log(`AI attempting to navigate to: ${url}`);
-            window.open(url);
-        }
+            if (!success) {
+                alert('No website found');
+                console.log("Could not find a valid domain for: " + siteName);
+            }
+        })();
+    }
     });
 
     if (speech == true) {
