@@ -1,5 +1,3 @@
-
-
 # **UG2\_TEAM\_3**
 
 # **ChromeX Release-1 Report**
@@ -52,7 +50,6 @@ ChromeX integrates with a separately deployed image-to-speech conversion system 
 - **Is maintained in a separate GitHub repository referenced in the main ChromeX README file**
 
 - **Here is GItHub Repo ChromeX :** [****https://github.com/RohitVenkatMutyala/se\_main\_cmax.git****](https://github.com/RohitVenkatMutyala/se_main_cmax.git)
-- "This project includes multiple files, so I deployed them separately. Here is the link to the Image-to-Text Converter." :-https://github.com/RohitVenkatMutyala/se_image_to_text_to_speech-convertor.git
 
 - **Operates as a standalone service that ChromeX communicates with via API**
 
@@ -91,14 +88,61 @@ Users can compose emails through voice commands, enabling:
 3. **URL Construction Logic**
 
 ```javascript
-// When direct match not found in dataset
 const domains = [".com", ".org", ".net", ".edu", ".io"];
-let url = "";
+        
+// Create a function to check if a URL is valid
+const checkUrlExists = (url) => {
+    return new Promise((resolve) => {
+        fetch(url, { method: 'HEAD', mode: 'no-cors' })
+            .then(() => resolve(true))
+            .catch(() => resolve(false));
+    });
+};
+        
+// Try each domain sequentially
+(async () => {
+    let success = false;
+    
+    for (const domain of domains) {
+        const url = `https://www.${siteName}${domain}`;
+        console.log(`AI attempting to navigate to: ${url}`);
+        
+        try {
+            // Check if URL exists before opening
+            const exists = await checkUrlExists(url);
+            
+            if (exists) {
+                window.open(url);
+                console.log(`Successfully opened: ${url}`);
+                success = true;
+                break;
+            } else {
+                console.log(`URL does not exist: ${url}`);
+                // Continue to next domain
+            }
+        } catch (error) {
+            console.log(`Error checking URL: ${url}`, error);
+            // Continue to the next domain
+        }}
 
-// First attempt: try with www prefix and first domain
-url = `https://www.${siteName}${domains[0]}`;
-console.log(`AI attempting to navigate to: ${url}`);
-window.open(url);
+clear Exaplnation of the URL Generation :-
+This code creates a system that tries to find a valid website by testing different domain extensions. Here's what it's doing:
+Setting up domain options: It starts with an array of common domain extensions (.com, .org, .net, .edu, .io).
+Creating a URL validation function: The checkUrlExists function uses JavaScript's fetch API to check if a URL exists by making a lightweight HEAD request (which doesn't download the full page). It returns a Promise that resolves to true if the URL is accessible and false if it's not.
+Testing domains sequentially: The main part is an immediately invoked async function that:
+Loops through each domain extension
+For each domain, constructs a full URL like https://www.siteName.com (where siteName is a variable that should be defined elsewhere)
+Logs the attempt to the console
+Tries to verify if the URL exists
+If the URL exists, it:
+Opens the URL in a new browser tab using window.open()
+Logs success
+Sets a success flag
+Stops checking further domains (breaks the loop)
+If the URL doesn't exist, it logs this and continues to the next domain
+If an error occurs, it logs the error and continues to the next domain
+This is essentially a domain availability checker that also automatically opens the first valid website it finds. It's designed to find which domain extensions a particular site name is using.
+Note: There's a variable siteName being used that doesn't appear to be defined in the code you shared. This would need to be defined before running this script.
 ```
 
 4. **Response Execution**
