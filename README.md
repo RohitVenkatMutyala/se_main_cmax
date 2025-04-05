@@ -50,7 +50,7 @@ ChromeX integrates with a separately deployed image-to-speech conversion system 
 - **Is maintained in a separate GitHub repository referenced in the main ChromeX README file**
 
 - **Here is GItHub Repo ChromeX :** [****https://github.com/RohitVenkatMutyala/se\_main\_cmax.git****](https://github.com/RohitVenkatMutyala/se_main_cmax.git)
-- **This project includes multiple files, so I deployed them separately. Here is the link to the Image-to-Text Converter : ** ( https://rohitvenkatmutyala.github.io/se_image_to_text_to_speech-convertor/)
+- **This project includes multiple files, so I deployed them separately. Here is the link to the Image-to-Text Converter : ** ( https://github.com/RohitVenkatMutyala/se_image_to_text_to_speech-convertor.git)
 
 - **Operates as a standalone service that ChromeX communicates with via API**
 
