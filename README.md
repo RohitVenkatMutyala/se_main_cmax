@@ -12,13 +12,11 @@ CHROMEX is a powerful Chrome extension that allows you to interact with various 
 .
 ├── images/                  # Image assets directory
 │   ├── UML.jpeg             # UML diagram image
-│   ├── icon.png             # Extension icon
 │   ├── icon.svg             # Vector icon
 │   ├── image_to_voice.jpeg  # Image to voice converter image
 │   └── voice_code.jpeg      # Voice code image
 ├── scripts/                 # JavaScript files
 │   ├── background.js        # Background script
-│   ├── bkr.js               # Helper script
 │   ├── ccl.js               # Component script
 │   ├── jquery-3.6.1.min.js  # jQuery library
 │   ├── keyboard.js          # Keyboard handler
@@ -27,6 +25,8 @@ CHROMEX is a powerful Chrome extension that allows you to interact with various 
 ├── README.md                # This file
 ├── main.html                # Main HTML file
 ├── manifest.json            # Extension manifest
+├── bk.js                    # Helper script
+├── icon.png                 # Extension icon
 └── styles.css               # CSS styles
 ```
 
